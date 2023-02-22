@@ -169,7 +169,7 @@
   transform: translateY(0);
 }
 
-/* ******************* @media ******************* */
+/* ******************* @media styles ******************* */
 
 @media screen and (max-width: 600px) {
   .hideMobile {

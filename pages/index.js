@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Projects from '../components/Projects';
 
 export default function Home() {
   return (
@@ -11,6 +12,8 @@ export default function Home() {
         />
         <link rel='icon' href='/favicon.ico' />
       </Head>
+
+      <Projects />
     </div>
   );
 }

@@ -1,0 +1,25 @@
+.showOnMobile {
+  display: none;
+}
+
+.projectImages {
+  position: relative;
+  width: fit-content;
+}
+
+.iphoneImage {
+  position: absolute;
+  left: 0;
+}
+
+.projectImages figcaption {
+  font-size: 0.8rem;
+  opacity: 0.5;
+  text-align: center;
+}
+
+@media screen and (max-width: 600px) {
+  .showOnMobile {
+    display: block;
+  }
+}
