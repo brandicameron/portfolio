@@ -15,12 +15,19 @@
 
 .projectImages {
   position: relative;
-  width: fit-content;
+}
+
+.iphoneImage,
+.ipadImage {
+  width: min(620px, 50vw);
+  height: auto;
+  filter: drop-shadow(10px 10px 10px rgba(0 0 0 / 10%));
 }
 
 .iphoneImage {
   position: absolute;
-  left: 0;
+  left: 1rem;
+  top: 1rem;
 }
 
 .projectImages figcaption {
@@ -90,7 +97,7 @@
 .thumbnail {
   width: 80px;
   height: auto;
-  box-shadow: 12.053px 4.87px 10px 0px rgba(0, 0, 0, 0.11);
+  box-shadow: 8px 5px 10px -3px rgba(0, 0, 0, 0.12);
 }
 
 @media screen and (max-width: 600px) {
