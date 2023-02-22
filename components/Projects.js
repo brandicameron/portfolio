@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 export default function Projects() {
   return (
-    <article className={styles.project}>
+    <article className={styles.projects}>
       <figure className={styles.projectImages}>
         <Image
           priority='true'
@@ -24,7 +24,7 @@ export default function Projects() {
         <figcaption>Design &amp; Developement: Brandi Cameron</figcaption>
       </figure>
 
-      <section className={styles.projectInfo}>
+      <section className={styles.projectData}>
         <h1>Blackjack</h1>
 
         <ul className={styles.projectTechStack}>
