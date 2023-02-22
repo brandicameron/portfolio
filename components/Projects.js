@@ -1,96 +1,91 @@
 import styles from './Projects.module.css';
+import { useState } from 'react';
 import Image from 'next/image';
+import { projects } from '../data/projects';
+import { v4 as uuidv4 } from 'uuid';
 
 export default function Projects() {
+  const [selectedProject, setSelectedProject] = useState(projects[0]);
+
+  const handleChooseProject = (e) => {
+    const projectIndex = e.target.getAttribute('data-index');
+    setSelectedProject(projects[projectIndex]);
+  };
+
   return (
     <article className={styles.projects}>
       <figure className={styles.projectImages}>
-        <Image
-          priority='true'
-          src='/images/projects/blackjack-ipad.png'
-          width={620}
-          height={474}
-          alt='Blackjack game shown on iPad.'
-          className={styles.ipadImage}
-        ></Image>
-        <Image
-          priority='true'
-          src='/images/projects/blackjack-iphone.png'
-          width={620}
-          height={474}
-          alt='Blackjack game shown on iPhone.'
-          className={styles.iphoneImage}
-        ></Image>
+        <a href={selectedProject.links[0].href} target='_blank' rel='noopener noreferrer'>
+          <Image
+            priority='true'
+            src={selectedProject.ipad}
+            width={620}
+            height={474}
+            alt={selectedProject.ipadAlt}
+            className={styles.ipadImage}
+          ></Image>
+          <Image
+            priority='true'
+            src={selectedProject.iphone}
+            width={620}
+            height={474}
+            alt={selectedProject.iphoneAlt}
+            className={styles.iphoneImage}
+          ></Image>
+        </a>
         <figcaption>Design &amp; Developement: Brandi Cameron</figcaption>
       </figure>
 
       <section className={styles.projectData}>
-        <h1>Blackjack</h1>
+        <h1>{selectedProject.title}</h1>
 
         <ul className={styles.projectTechStack}>
-          <li>React</li>
-          <li>Redux</li>
-          <li>CSS Animations</li>
+          {selectedProject.technologies.map((tech) => (
+            <li key={uuidv4()}>{tech}</li>
+          ))}
         </ul>
 
         <ul className={styles.projectLinks}>
-          <li>
-            <button className={styles.showOnMobile}>More Info</button>
-          </li>
-          <li>
-            <a href='/' target='_blank' rel='noopener noreferrer'>
-              View Live
-            </a>
-          </li>
-          <li>
-            <a href='/' target='_blank' rel='noopener noreferrer'>
-              View Code
-            </a>
-          </li>
+          {selectedProject.links.map((link) => (
+            <li key={uuidv4()}>
+              <a href={link.href} target='_blank' rel='noopener noreferrer'>
+                {link.title}
+              </a>
+            </li>
+          ))}
         </ul>
 
-        <p>
-          My first React project and damn I jumped straight in the deep end, but hey — what a rush!
-        </p>
-        <p>
-          The game plays with a custom designed 6 deck shoe, reshuffling after falling below 75
-          cards. Dealer must stand on 17, and blackjack pays 3:2. Selected chips animate to the
-          table from the correct location in the bank.
-        </p>
-        <p>Figuring out how to score aces in all circumstances was an especially fun challenge.</p>
+        {selectedProject.description.map((paragraph) => (
+          <p key={uuidv4()}>{paragraph}</p>
+        ))}
+
+        {selectedProject.descriptionList && (
+          <ul className={styles.descriptionList}>
+            {selectedProject.descriptionList.map((li) => (
+              <li key={uuidv4()}>{li}</li>
+            ))}
+          </ul>
+        )}
       </section>
 
       <ul className={styles.projectThumbnails}>
-        <li>
-          <Image
-            priority='true'
-            src='/images/projects/blackjack-ipad.png'
-            width={620}
-            height={474}
-            alt='Blackjack game shown on iPad.'
-            className={styles.thumbnail}
-          ></Image>
-        </li>
-        <li>
-          <Image
-            priority='true'
-            src='/images/projects/nosh-ipad.png'
-            width={620}
-            height={474}
-            alt='Blackjack game shown on iPad.'
-            className={styles.thumbnail}
-          ></Image>
-        </li>
-        <li>
-          <Image
-            priority='true'
-            src='/images/projects/cleangreen-ipad.png'
-            width={620}
-            height={474}
-            alt='Blackjack game shown on iPad.'
-            className={styles.thumbnail}
-          ></Image>
-        </li>
+        {projects.map((project, index) => (
+          <li key={uuidv4()}>
+            <button>
+              <Image
+                priority='true'
+                src={project.ipad}
+                width={620}
+                height={474}
+                alt={project.title}
+                title={project.title}
+                data-index={index}
+                className={styles.thumbnail}
+                onClick={handleChooseProject}
+              ></Image>
+            </button>
+          </li>
+        ))}
       </ul>
     </article>
   );
